@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tax & Invoice Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <header class="page-header">
+        <h1>Tax &amp; Invoice Dashboard</h1>
+        <button id="add-client-btn" class="primary" type="button">
+          + Add Client
+        </button>
+      </header>
+
+      <section class="card">
+        <h2>New invoice</h2>
+        <form id="invoice-form" novalidate>
+          <label>
+            Client
+            <select id="client-id" name="client_id" required></select>
+          </label>
+          <label>
+            Amount
+            <input
+              id="amount"
+              name="amount"
+              type="number"
+              min="0.01"
+              step="0.01"
+              required
+            />
+          </label>
+          <label>
+            Tax rate (%)
+            <input
+              id="tax-rate"
+              name="tax_rate"
+              type="number"
+              min="0"
+              step="0.01"
+              required
+            />
+          </label>
+          <button type="submit">Create invoice</button>
+          <p id="form-error" class="error" role="alert" hidden></p>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>All Invoices</h2>
+          <div class="filter" id="filter">
+            <button
+              id="filter-btn"
+              class="filter-btn"
+              type="button"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+            >
+              <span id="filter-label">All Clients</span>
+              <span class="caret" aria-hidden="true">▾</span>
+            </button>
+            <ul
+              id="filter-menu"
+              class="filter-menu"
+              role="listbox"
+              hidden
+            ></ul>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table id="invoices">
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Amount</th>
+                <th>Tax Rate</th>
+                <th>Tax Owed</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="client-dialog" class="dialog">
+      <form id="client-form" method="dialog" novalidate>
+        <h2>Add client</h2>
+        <label>
+          Name
+          <input id="client-name" name="name" type="text" required />
+        </label>
+        <label>
+          Email
+          <input id="client-email" name="email" type="email" required />
+        </label>
+        <p id="client-error" class="error" role="alert" hidden></p>
+        <div class="dialog-actions">
+          <button type="button" id="client-cancel" class="secondary">
+            Cancel
+          </button>
+          <button type="submit" class="primary">Create</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
