@@ -47,13 +47,13 @@ Open <http://localhost:3000> in your browser.
 
 ## API
 
-| Method | Path                       | Description                                                  |
-| ------ | -------------------------- | ------------------------------------------------------------ |
-| GET    | `/api/clients`             | List all clients                                             |
-| POST   | `/api/clients`             | Create a client (`name`, `email` — both required, non-empty) |
-| POST   | `/api/invoices`            | Create invoice (validates `amount > 0`, `tax_rate >= 0`)     |
-| GET    | `/api/invoices/summary`    | Invoice rows joined with client + computed `tax_owed`. Optional `?client_id=N` filter. |
-| PATCH  | `/api/invoices/:id/pay`    | Mark invoice as Paid (idempotent)                            |
+| Method | Path                    | Description                                                                            |
+| ------ | ----------------------- | -------------------------------------------------------------------------------------- |
+| GET    | `/api/clients`          | List all clients                                                                       |
+| POST   | `/api/clients`          | Create a client (`name`, `email` — both required, non-empty)                           |
+| POST   | `/api/invoices`         | Create invoice (validates `amount > 0`, `tax_rate >= 0`)                               |
+| GET    | `/api/invoices/summary` | Invoice rows joined with client + computed `tax_owed`. Optional `?client_id=N` filter. |
+| PATCH  | `/api/invoices/:id/pay` | Mark invoice as Paid (idempotent)                                                      |
 
 ### POST /api/clients
 
@@ -114,3 +114,7 @@ Marks the invoice as Paid and returns the updated row. Calling it on an already-
 - **Two tsconfigs** — `tsconfig.json` is `noEmit` and type-checks both `src/` and `scripts/`. `tsconfig.build.json` extends it, narrows include to `src/`, and emits to `dist/`.
 - **No build step for the frontend** — served directly by Express, so there's one process and no CORS to configure.
 - **Auto-migrate on connect** — `src/db/database.ts` runs `migrate()` at import time, so any consumer (server or seed) gets a ready schema.
+
+## Further Notes
+
+The project was implemented in a single focused development session, with post-build refactoring for clarity and structure.
